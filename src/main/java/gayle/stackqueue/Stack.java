@@ -36,6 +36,13 @@ public class Stack<E> {
         return head.element;
     }
 
+    @Override
+    public int hashCode() {
+        int result = head != null ? head.hashCode() : 0;
+        result = 31 * result + size;
+        return result;
+    }
+
     private class Node {
 
         private Node next;

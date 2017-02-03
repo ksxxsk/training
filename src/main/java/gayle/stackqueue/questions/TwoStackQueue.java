@@ -1,6 +1,13 @@
-package gayle.stackqueue;
+package gayle.stackqueue.questions;
 
 
+import gayle.stackqueue.Queue;
+import gayle.stackqueue.Stack;
+
+/**
+ * Implement a MyQueue class which implements a queue using two stacks.
+ Hints: #98, #114
+ */
 public class TwoStackQueue<E> implements Queue<E> {
 
     private final Stack<E> in;

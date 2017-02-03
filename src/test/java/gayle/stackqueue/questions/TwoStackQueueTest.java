@@ -1,14 +1,14 @@
-package gayle.stackqueue;
+package gayle.stackqueue.questions;
 
+import gayle.stackqueue.Queue;
+import gayle.stackqueue.questions.TwoStackQueue;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created on 30.01.2017.
- */
-public class QueueTest {
+
+public class TwoStackQueueTest {
 
     private final Queue<Integer> queue = new TwoStackQueue<>();
 
