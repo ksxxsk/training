@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class ListOfDepths {
 
-    public static <E> List<List<E>> listOfDepths(TreeNode<E> tree) {
+    public static <E> List<List<E>> listOfDepths(TreeNode<E> root) {
 
         return null;
     }
