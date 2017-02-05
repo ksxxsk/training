@@ -18,31 +18,30 @@ public class HeightOfABinaryTree {
         if (root == null)
             return height;
 
-        return Math.max( height(root.left, height+1), height(root.right, height+1));
+        return Math.max(height(root.left, height + 1), height(root.right, height + 1));
     }
 
     public static Node insert(Node root, int data) {
-        if(root == null){
+        if (root == null) {
             return new Node(data);
-        }
-        else {
+        } else {
             Node cur;
-            if(data <= root.data){
+            if (data <= root.data) {
                 cur = insert(root.left, data);
                 root.left = cur;
-            }
-            else{
+            } else {
                 cur = insert(root.right, data);
                 root.right = cur;
             }
             return root;
         }
     }
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         int t = scan.nextInt();
         Node root = null;
-        while(t-- > 0){
+        while (t-- > 0) {
             int data = scan.nextInt();
             root = insert(root, data);
         }

@@ -1,6 +1,5 @@
 package geeksforgeeks.bitmanipulation;
 
-import geeksforgeeks.bitmanipulation.MagicNumber;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;

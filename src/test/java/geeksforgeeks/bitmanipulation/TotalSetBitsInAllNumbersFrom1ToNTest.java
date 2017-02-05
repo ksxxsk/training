@@ -1,6 +1,5 @@
 package geeksforgeeks.bitmanipulation;
 
-import geeksforgeeks.bitmanipulation.TotalSetBitsInAllNumbersFrom1ToN;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;

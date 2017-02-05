@@ -1,6 +1,5 @@
 package geeksforgeeks.bitmanipulation;
 
-import geeksforgeeks.bitmanipulation.SumOfBitDifferencesAmongAllPairs;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;

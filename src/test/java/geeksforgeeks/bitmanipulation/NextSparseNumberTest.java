@@ -1,6 +1,5 @@
 package geeksforgeeks.bitmanipulation;
 
-import geeksforgeeks.bitmanipulation.NextSparseNumber;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;

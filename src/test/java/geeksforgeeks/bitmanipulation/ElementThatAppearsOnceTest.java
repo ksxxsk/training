@@ -1,6 +1,5 @@
 package geeksforgeeks.bitmanipulation;
 
-import geeksforgeeks.bitmanipulation.ElementThatAppearsOnce;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
