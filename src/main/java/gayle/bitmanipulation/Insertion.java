@@ -14,7 +14,9 @@ package gayle.bitmanipulation;
 public class Insertion {
 
     public static int insert(int N, int M, int i, int j) {
-        int mask = ~0 << j | ((1 << (i + 1)) - 1 );
-        return N & mask | (M << i);
+        int leftMask = j == 31 ? 0 : ~0 << j + 1;
+        int mask =  leftMask | ((1 << i) - 1 );
+
+        return (N & mask) | (M << i);
     }
 }

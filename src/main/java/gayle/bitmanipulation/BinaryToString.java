@@ -7,4 +7,23 @@ package gayle.bitmanipulation;
  Hints: #143, #167, #173, #269, #297
  */
 public class BinaryToString {
+
+    public String conversion(double num) {
+        StringBuilder binary = new StringBuilder();
+        while (num > 0) {
+            if(binary.length() >= 32)
+                return "ERROR";
+
+            double r = num * 2;
+            if(r >= 1) {
+                binary.append(1);
+                num -= 1;
+            } else {
+                binary.append(0);
+                num = r;
+            }
+        }
+
+        return binary.toString();
+    }
 }
