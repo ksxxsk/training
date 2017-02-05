@@ -1,11 +1,5 @@
 package gayle.treegraph;
 
-import sun.reflect.generics.tree.Tree;
-
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Stack;
-
 public class TreeNode<E> {
 
     private TreeNode<E> parent;

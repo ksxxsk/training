@@ -1,7 +1,5 @@
 package geeksforgeeks;
 
-import java.util.stream.IntStream;
-
 /**
  * Given an array where every element occurs three times, except one element which occurs only once. Find the element
  * that occurs once. Expected time complexity is O(n) and O(1) extra space. Examples:
@@ -33,7 +31,7 @@ public class ElementThatAppearsOnce {
                 if ((number & x) != 0)
                     count++;
 
-            if( count % no == 1)
+            if (count % no == 1)
                 result |= x;
         }
         return result;

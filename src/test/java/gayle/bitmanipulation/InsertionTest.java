@@ -14,7 +14,7 @@ public class InsertionTest {
 
     @Test
     public void insertionNegativeNumber() {
-        assertThat(Insertion.insert(-521,0,31,31), is(2147483127));
+        assertThat(Insertion.insert(-521, 0, 31, 31), is(2147483127));
     }
 
 }

@@ -6,7 +6,7 @@ import gayle.stackqueue.Stack;
 
 /**
  * Implement a MyQueue class which implements a queue using two stacks.
- Hints: #98, #114
+ * Hints: #98, #114
  */
 public class TwoStackQueue<E> implements Queue<E> {
 
@@ -37,7 +37,7 @@ public class TwoStackQueue<E> implements Queue<E> {
     }
 
     private void popFromInPushToOut() {
-        if(out.isEmpty())
+        if (out.isEmpty())
             while (!in.isEmpty())
                 out.push(in.pop());
     }

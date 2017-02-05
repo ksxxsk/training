@@ -11,12 +11,12 @@ public class Stack<E> {
     }
 
     public void push(E element) {
-        if(head == null)
+        if (head == null)
             head = new Node(null, element);
         else
             head = new Node(head, element);
 
-        size++ ;
+        size++;
     }
 
     public E pop() {

@@ -20,13 +20,13 @@ public class SumVsXOR {
     }
 
     private static long sumVsXor2(long n) {
-        if(n == 0)
+        if (n == 0)
             return 0;
 
         String binary = Long.toBinaryString(n);
         long num = 1;
-        for(int i=0; i< binary.length(); i++)
-            if(binary.charAt(i) == '0')
+        for (int i = 0; i < binary.length(); i++)
+            if (binary.charAt(i) == '0')
                 num <<= 1;
 
         return num;

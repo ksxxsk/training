@@ -1,7 +1,6 @@
 package gayle.stackqueue.questions;
 
 import gayle.stackqueue.Queue;
-import gayle.stackqueue.questions.TwoStackQueue;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;

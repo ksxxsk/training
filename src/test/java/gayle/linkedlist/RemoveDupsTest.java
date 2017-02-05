@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Created on 1/30/2017.
@@ -76,7 +76,7 @@ public class RemoveDupsTest {
     private <T> void assertListsAreEqual(LinkedList<T> list, LinkedList<T> expected) {
         assertThat(list.size(), is(expected.size()));
 
-        for(int i=0; i<list.size(); i++)
+        for (int i = 0; i < list.size(); i++)
             assertThat(list.get(i), equalTo(expected.get(i)));
     }
 

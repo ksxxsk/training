@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Created on 1/31/2017.
@@ -37,7 +37,7 @@ public class SumListsTest {
     private void assertListEquals(LinkedList<Integer> input, LinkedList<Integer> expected) {
         assertThat(input.size(), equalTo(expected.size()));
 
-        for(int i=0; i<input.size(); i++)
+        for (int i = 0; i < input.size(); i++)
             assertThat(input.get(i), equalTo(expected.get(i)));
     }
 

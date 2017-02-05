@@ -23,15 +23,15 @@ public class SuccessorTest {
     private TreeNode<Integer> n20;
 
     /**
-     *          15
-     *        /   \
-     *      6     18
-     *     / \   /  \
-     *    3  7  17  20
-     *  /  \  \
+     * 15
+     * /   \
+     * 6     18
+     * / \   /  \
+     * 3  7  17  20
+     * /  \  \
      * 2   4   13
-     *        /
-     *       9
+     * /
+     * 9
      */
     @Before
     public void setUp() {

@@ -3,7 +3,7 @@ package geeksforgeeks;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class ElementThatAppearsOnceTest {
 
@@ -18,8 +18,8 @@ public class ElementThatAppearsOnceTest {
 
     @Test
     public void appearsOnceSumBits() {
-        assertThat(ElementThatAppearsOnce.appearsOnceSumBits(oneElement,3), is(2));
-        assertThat(ElementThatAppearsOnce.appearsOnceSumBits(oneFour,4), is(2));
+        assertThat(ElementThatAppearsOnce.appearsOnceSumBits(oneElement, 3), is(2));
+        assertThat(ElementThatAppearsOnce.appearsOnceSumBits(oneFour, 4), is(2));
     }
 
 }

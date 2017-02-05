@@ -1,13 +1,13 @@
 package gayle.treegraph.questions;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-
 import gayle.treegraph.TreeNode;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 /**
  */
@@ -36,13 +36,13 @@ public class MinimalSearchTreeTest {
 
     @Test
     public void oneElementArray() {
-        int[] array = { 1 };
+        int[] array = {1};
         assertMinimalBST(array);
     }
 
     @Test
     public void bigSortedArray() {
-        int[] array = { 1, 4, 5, 6, 12, 43, 145, 190, 214, 233, 235, 341, 450 };
+        int[] array = {1, 4, 5, 6, 12, 43, 145, 190, 214, 233, 235, 341, 450};
 
         assertMinimalBST(array);
     }

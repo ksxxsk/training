@@ -4,9 +4,9 @@ import gayle.stackqueue.Stack;
 
 /**
  * Write a program to sort a stack such that the smallest items are on the top. You can use
- an additional temporary stack, but you may not copy the elements into any other data structure
- (such as an array). The stack supports the following operations: push, pop, peek, and isEmpty.
- Hints: #15, #32, #43
+ * an additional temporary stack, but you may not copy the elements into any other data structure
+ * (such as an array). The stack supports the following operations: push, pop, peek, and isEmpty.
+ * Hints: #15, #32, #43
  */
 public class SortStack {
 
@@ -39,7 +39,7 @@ public class SortStack {
 
     public static <E extends Comparable> void sort2(Stack<E> stack) {
         Stack<E> temp = new Stack<E>();
-        while(!stack.isEmpty()) {
+        while (!stack.isEmpty()) {
             E element = stack.pop();
             while (!temp.isEmpty() && element.compareTo(temp.peek()) < 0)
                 stack.push(temp.pop());

@@ -19,7 +19,7 @@ public class RouteBetweenNodes {
         while (!queue.isEmpty()) {
             Graph.Node parent = queue.remove();
             for (Graph.Node node : adjacencyLists.get(parent)) {
-                if(node == node2)
+                if (node == node2)
                     return true;
 
                 if (!node.isVisited()) {
@@ -41,10 +41,10 @@ public class RouteBetweenNodes {
 
         while (!stack.isEmpty()) {
             Graph.Node n = stack.pop();
-            if(!n.isVisited()) {
+            if (!n.isVisited()) {
                 n.setVisited(true);
-                for(Graph.Node adjanced: adjacencyLists.get(n)) {
-                    if(adjanced == node2)
+                for (Graph.Node adjanced : adjacencyLists.get(n)) {
+                    if (adjanced == node2)
                         return true;
                     stack.push(adjanced);
                 }

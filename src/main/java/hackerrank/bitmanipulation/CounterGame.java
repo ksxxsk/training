@@ -14,14 +14,14 @@ public class CounterGame {
 
     private static String counterGame(BigInteger n) {
         int counter = 0;
-        while(isNotOne(n)) {
+        while (isNotOne(n)) {
             counter++;
             if (isPowerOfTwo(n))
                 n = reduceByHalf(n);
             else
                 n = reduceByTheLargerPowOf2(n);
         }
-        return counter%2 == 0 ? "Richard" : "Louise";
+        return counter % 2 == 0 ? "Richard" : "Louise";
     }
 
     private static boolean isNotOne(BigInteger n) {
@@ -39,9 +39,9 @@ public class CounterGame {
     private static BigInteger reduceByTheLargerPowOf2(BigInteger n) {
         int bits = n.bitLength();
         BigInteger pow = n.add(BigInteger.ZERO);
-        for(int i=0; i<bits-1; i++)
+        for (int i = 0; i < bits - 1; i++)
             pow = pow.clearBit(i);
-        pow = pow.setBit(bits-1);
+        pow = pow.setBit(bits - 1);
         n = n.subtract(pow);
         return n;
     }

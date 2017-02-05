@@ -19,7 +19,7 @@ public class LinkedList<E> implements Iterable<E> {
         Node oldLast = tail;
         Node node = new Node(null, element);
         tail = node;
-        if( head == null )
+        if (head == null)
             head = node;
         else
             oldLast.next = node;
@@ -30,14 +30,14 @@ public class LinkedList<E> implements Iterable<E> {
         checkIndex(index);
 
         Node<E> node = head;
-        for(int i=0; i<index; i++)
+        for (int i = 0; i < index; i++)
             node = node.next;
 
         return node.element;
     }
 
     private void checkIndex(int index) {
-        if(index > size - 1)
+        if (index > size - 1)
             throw new IndexOutOfBoundsException();
     }
 
@@ -45,13 +45,13 @@ public class LinkedList<E> implements Iterable<E> {
         checkIndex(index);
 
         Node parent = head;
-        for(int i=0; i<index-1; i++)
+        for (int i = 0; i < index - 1; i++)
             parent = parent.next;
 
         Node toRemove = parent.next;
         Node newChild = toRemove.next;
         toRemove.element = null;
-        if( newChild != null) {
+        if (newChild != null) {
             parent.next = newChild;
         }
 
@@ -63,12 +63,11 @@ public class LinkedList<E> implements Iterable<E> {
 
         Node<E> previous = null;
         Node<E> node = head;
-        while(node != null) {
-            if(set.contains(node.element)) {
+        while (node != null) {
+            if (set.contains(node.element)) {
                 previous.next = node.next;
                 size--;
-            }
-            else {
+            } else {
                 set.add(node.element);
                 previous = node;
             }
@@ -84,7 +83,7 @@ public class LinkedList<E> implements Iterable<E> {
             Node next = node.next;
 
             while (next != null) {
-                if(node.element.equals(next.element)) {
+                if (node.element.equals(next.element)) {
                     previous.next = next.next;
                     size--;
                 } else {
@@ -102,7 +101,7 @@ public class LinkedList<E> implements Iterable<E> {
         while (node != null) {
             Node runner = node;
             while (runner.next != null) {
-                if(runner.next.element.equals(node.element)) {
+                if (runner.next.element.equals(node.element)) {
                     runner.next = runner.next.next;
                     size--;
                 } else
@@ -128,7 +127,7 @@ public class LinkedList<E> implements Iterable<E> {
 
         Node<E> node = kThToLastRecursive(head.next, k, index);
         index[0] = index[0] + 1;
-        if(index[0] == k)
+        if (index[0] == k)
             return head;
 
         return node;
@@ -138,10 +137,10 @@ public class LinkedList<E> implements Iterable<E> {
         Node<E> kIndex = head;
         Node<E> index = head;
 
-        for(int i=0; i<k; i++)
+        for (int i = 0; i < k; i++)
             kIndex = kIndex.next;
 
-        while(kIndex != null) {
+        while (kIndex != null) {
             kIndex = kIndex.next;
             index = index.next;
         }
@@ -187,7 +186,7 @@ public class LinkedList<E> implements Iterable<E> {
 
         @Override
         public T next() {
-            if(index == 0)
+            if (index == 0)
                 lastReturned = head;
             else {
                 previous = lastReturned;
@@ -202,8 +201,8 @@ public class LinkedList<E> implements Iterable<E> {
 
         @Override
         public void remove() {
-            if(hasNext())
-                if(index == 1)
+            if (hasNext())
+                if (index == 1)
                     head = current;
                 else
                     previous.next = current;
