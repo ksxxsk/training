@@ -1,4 +1,4 @@
-package geeksforgeeks;
+package geeksforgeeks.bitmanipulation;
 
 /**
  * Given an array where every element occurs three times, except one element which occurs only once. Find the element

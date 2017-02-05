@@ -1,4 +1,4 @@
-package geeksforgeeks;
+package geeksforgeeks.bitmanipulation;
 
 /**
  * Write a program to print Binary representation of a given number.

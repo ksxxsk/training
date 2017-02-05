@@ -1,4 +1,4 @@
-package geeksforgeeks;
+package geeksforgeeks.bitmanipulation;
 
 /**
  * Given an unsigned integer, swap all odd bits with even bits. For example, if the given number is 23 (00010111), it

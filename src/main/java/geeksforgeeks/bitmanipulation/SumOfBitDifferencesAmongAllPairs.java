@@ -1,4 +1,4 @@
-package geeksforgeeks;
+package geeksforgeeks.bitmanipulation;
 
 /**
  * Given an integer array of n integers, find sum of bit differences in all pairs that can be formed from array

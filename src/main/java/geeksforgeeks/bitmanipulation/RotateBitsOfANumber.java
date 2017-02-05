@@ -1,4 +1,4 @@
-package geeksforgeeks;
+package geeksforgeeks.bitmanipulation;
 
 /**
  * Bit Rotation: A rotation (or circular shift) is an operation similar to shift except that the bits that fall off at
