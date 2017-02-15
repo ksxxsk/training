@@ -1,0 +1,279 @@
+Functions 
+- the best have as few arguments as possible (its apply to constuctors - it may be better to use setters - builder pattern)
+- max 3 arguments
+- no boolean arguments - boolean simply means that functions have 2 functioncs - one for true case and one for false case
+	you should have write separate function - one for a false case and one for the true case
+- avoid output arguments
+- passing null/expecting null should be avoided. It's like boolean it implies two possible behaviours: 1 for not null case and one for null case 
+- switch statements:
+	each case is likely to have dependecy outwards to the external module -> the source code dependecy points in the same direction as the flow of control, switch depends on this modules
+	whenever there is change in the modules, there is impact in the switch and the app that uses that switch
+	Solution:	1. invert dependecies with polymorphism
+				2. move switch to a place where it can't do any harm - one the other side of boundry that application partition. It should treated as detail (as a plugin). App should talk with it using abstraction.
+				
+DI framwork usage episode4 36:00
+
+- side effect - when function changes the variable that outlives function call - it may change the behaviour of this function or another function next time it is called
+	our goal is not to eliminate side effects - they are often desired. Our goal is to empose discipline upon where and how those side effects happen
+- temporal coupling - functions need to be called in particular order. it could be eliminated by using them in single function in correct order with job that need to be done between them:
+	example:
+	void open(File f, FileCommand c) {
+		f.open();
+		c.process();
+		f.close();
+	} this techinique is called passing a blah
+	
+- command querry separation
+	1. command changes the state of the system it has a side effect, it returns nothing
+	2. querry does not have a side effect, querry returns value of computation or state of the system
+	
+	Functions that change state should not return value, functions that returns value should not change state.
+	
+- tell don't ask - we should tell objects what to do, not ask them what their state is.
+	We don't want to ask object of its state and make decisions on this objects behalf. Object knows its state and can (should?) make its own decisions.
+- law of demeter - episode4 54:00
+- single entry - single exit rule
+- error handlingepisode4 1:03:00
+	1. avoid checked exceptions, they violate OCP princile couples source code more episode4 1:10:00
+	2. avoid using general java exceptions, you your own with descriptive names, context and scope (they can be declared inside class)
+		this allows to avoid exception messages`
+	3. 
+- null object patter for special case (example stact with zero capacity) to avoid if/else defensive checks
+- dont use null as an error  - it cannot be used when trying to get element from empty collection - exception should be thrown
+- null is a value - it can be returned when value is not find in collection
+- try - is a function - it's a level of abstraction - it should contain single line - invocaton of other function
+
+--------------
+Comments
+should be rare, should be reserved for the special cases where programmer attentions is really necessary.
+It should be intent of every programmer to write code that expresses it intences so well that it doesn't need comments => every comment in code if a failure to express yourself
+Often in time comments degrade to misinformation and lies
+
+Formatting
+White space carries information.
+
+Classes
+1. The less implementation you have exposed the more opportunities you have to make polymorphic classes.
+	Use classes to protect yourself from new types but not from new functions.
+2. From the outside looking in, class is set of methods => since object is instance of the class it appears to have no variables => object appers to have no observable state. 
+	Those methods may operate on data, but they tell you nothing about how this data is implemented.
+	Those methods are not getters and setters. If they must expose some data, they do in the most abstract form possible (to conform with 1) 
+	Tell don't ask - if object has no observable state it easy to tell it do sth, but it makes little sense to ask him about anything - use this to avoid getters and setters.
+
+Data Structure
+Opposite of a class -> no funcitons(apart from getters, setters, some naviagation methods -they manipulate individual variables - they expose implementation), they are bags of data (variables)
+You can't tell data structure to do sth, you can only them for state.
+
+Boundries
+For each boundry, one side is concrete and other is abstract. (Main is concrete and the other side is abstract from the Main point of view)
+In such a boundry you want all the source code dependencies pointing away from the concrete towards the abstrarct side.
+
+Impedance mismatch -> db does not contain object - they contain data structures. You cannot force a data structure to be an object. Hibernate itp (object relational mappers) -> they map relational table to data structure ( they move data structure in db to data structure in memory)
+
+--------------
+Architecture exposes usage, it'a about how system is being used. Good architecture screams uses cases. For example when looking at accounting system you should see accounting system not web system.
+When looking at system we don't want to see delivery mechanism (for exmaple MVC pattern) we want to see use cases. We don't want to see uses cases coupled to delivery mechanism.
+We want the separation between UI and use cases to be very strong (so strong that they can be deployed independly). We don't want uses cases to know anything at all about delivry mechanism -> we want decision about UI, database, frameworks, tools to be completely independent of the use cases.
+Decision about DB, UI, framework can and shoulb de dereferred. Good architect maximizes number of decisions not made - keep options open for as long as possible.
+This creates string separation between system components, which allows business to compare their cost to the business value.
+
+Use Cases
+Ivar Jacobsen - Object-Oriented Software Engineering - he resolved delivery mechanism problem, by understanding that the way the users interact with the system with the delivery independent way ->
+we define how user interact with the system without delivery specify workds exmaple: click, link etc. Instead we use words and concepts that don't imply delivery mechanism. Jacobsen called this interaction desctriptions uses cases.
+Jacobsen clamis that applicaton should be driven by delivery independent use cases, it's the use cases that form the central organizing principles and the abstractions which around the system is build.
+
+Use case is formal descripton of how a user interact with the system in order to achieve specific goal.
+Use doesn't mention screens, buttons, popups anything that may be related to delivery mechanism.
+It says about the data and commands that go into the system and the way the system responds -> use case is essentially algorithm for the interpretation of the input data and the generation of output data so we can create object that implements that use case.
+It contains:
+1. data ex: customer-id shipment-destination payment-information
+2. primary course: happy case, scenario when everything works correctly 
+ex. adding creating order
+- user issues command create order with above data
+- system validates all data
+- system creates order and determines order-id
+- system deliver order-id to client
+3. exception course: when sth went wrong
+ex validation error
+- system delivers error message to user
+Writing effective Use Cases - Alister Coberns
+
+Partitioning
+Architectures driven by use cases have 3 fundamental kinds of objects:
+1. business objects - entities - repositories of applicaton independent business rules
+example: product - would be valid for order entry system, order fullfilment system, inventory managment system, online catalogue
+methods in this object should be usefull in all og these kind of applications, it should not have any methods that are specific to any of these applications
+Application specific method would go to interactor objects
+2. user interface objects - boundaries - isolates the use case from the delivery mechanism and provide communiaction pathway between these two. Delivry system is on the far side of the boundry, use cases on the other side knows nothing about it.
+3. use case objects - interactors. Use cases are applicaton specific, since interactors implement use cases they are also application specific -> any application specific business rule belongs into interactor object
+create order interactor invokes both constructor and getId (agnostic methods) from order entity. Interactor knows how to invoke these method to achieve goal of use case.
+
+Delivery mechanism gathers user data wraps it up into canonical form and ships it through the boundry to the interactors.
+Interactor invoke application specific business rules, they go on and manipulate entitity objects (application agnostic business rules), gather the result together, wraps it up into canonical form and ship it back through the boundry to the delivery mechanism
+
+Isolation
+To keep delivery mechanism strongly isolated from the rest of the architecture, we need to strictly control source code dependecies ao they cross the boundry in one direction.
+Example: delivery mechanism is the web: web server, web framework,urld , html, css, jsp live on the delivery side of the boundry (including mvc architercture)
+
+
+----------------
+SRP is about users - responsonsibility that classes and functions have to those users. Specifically users who would request changes to the software.
+Responsibility can be viewed as a source of change.
+
+Example: who are the people who are sources of changes for the Employee class:
+1. for functions that calute pay: loyers, accoutnants who define payroll policy
+2. functions that deal with database: dba, architects who specify schema and platform for the database
+3. functions that deal with reports: consumers of the reports
+
+SRP talks about responsibilities that your software has to all the different groups of people that it serves. 
+It's about roles - sometimes the same person have few roles.
+We separete users of our software from the roles that they play. When users play certain roles we call them actors, responsibilities are tight to actors not individuals. Whenever the needs of the actor change the family of funcitons thats servs that actor will also have to change.
+
+Responsibility is a family of funcitons that servs one particular actor.
+
+To values of software:
+1. Primary:
+	Ability to keep up with changing needs, new requirements. 
+2. Secondary:
+	Behaviour - if software does what users needs without crashes bugs etc. then secondary value is high. 
+	When the current soft meets the current needs of the current user.
+
+We need to allocate responsibilities to modules by writing corresponding functions in these modules.
+
+Each responsibilities cause Employee class to use other classes from the system -> databse responsonsibility -> DB api, reports responsonsibility -> String api
+
+Colocations of responsibilities couples the actors - changes in class for Actor require redeploy whole class for all other actors.
+
+SRP - the module should have only one reason to change. We keep all responsibilities separete from each other. (it's about source files, classes, functions )
+
+---------------
+Bertram Mayers 89 - Object oriented software construction
+OCP - software module should be open for extension but closed for modification. It should be easy to change the behaviour of the module without changing source code. New features are added by adding new code instead of changing old code.
+Whenever you have a module whose behaviour you would like to extend without modyfing it, you separete extensible behaviour behind an abstract interface and turn the dependencies around.
+This is moral center of system architecture...
+
+We cannot perfecty conform to OCP because we cannot predict all future changes, by using iterative process with lots feedback and refactoring we can develop systems that perform well enough to the OCP
+
+---------------
+1989 - Barbara Liskov
+LSP - 
+Type - bag of operations (methods) (ex. integer - we dont care how it's internally represented. We care if 1+2 = 3)
+Relation between type and subtype is asymetrical subtype can be used as type but type cannot be used as subtype.
+
+Users using object T should be able to use object S (S is subtype of T) without knowing it. Subtype must be substitable for it parent.
+Statically typed languages (java,c++) rely on inheritance to provide polymorphism. To invoke polymorpically method you inkove method of a base class on child class. They are type set - will not compile if wrong type is used.
+On dynamically typed languages, instead of invoking methods we say we send messages. In dynamic languge when you want to call method of an object (send message to an object), the compiler doesn't know the type of that object. So the language has to wait to the runtime to resolve whether you can call this method (send a message).
+If the object can respond to that message, method is invoked, otherwise runtime error. So as long as object respond can responds to the same message they can be used polymorphically (no inheritance is needed) - duck typing (when a bird walks like a duck, quacks like a duck, swims as a duck you call this bird a duck).
+
+Rectangle and Square -> when user calls setHeight on rectangle it expect that width remain unchanged -> when using Square as a subtype of Rectangle we modify height together with width -> UNDEFINED BEHAVIOUR.
+
+The representative rule - representatives do not share the relations of things they represent. (Code represent square but is not a square do not shre geometric relationships)
+
+1. If super type does sth, subclass also should done this and od not violate expectations of the caller. Subtypes must meet expected behaviours - it can do more that supertype but it can never do less.
+- example: if derived function throws expeption uncoditionally - clear violation of LSP, author do not want this method to be called.
+- good indication may be using if instance of for subclasses. Is intance if of is allowed when compiler lost information about specific type and we know already know what type it is (we are asserting type)
+- typecase - behaviour based on is instance of types if, else if, else if etc. (may be soved with visitor without modyfing objects hierarchy)
+
+Type safe compilers don't finds all type errors, they only find errors that can be found through static analysis. They won't find square -> rectangle violation.
+Solution to prevent dynamic type errors:
+- Design by contract - every type has certains invariants that can be stated using booleans: example high and width of square must always be equal.
+Every method of class can be surrounded by preconditions (boolean expression that must be true before function can be called) and postconditions ( boolean conditions that must be true when function returns).
+- TDD
+
+---------------
+Interface segregation principle
+
+Interfaces have more to do with classes that use them than with classes that implement them. They are usually packed with classes that used them Switch -> Switchable <|- Light.
+Interfaces in java and c# exists because of lack of multiple inheritance - choice od language designers.
+
+This principle applies to the fat classes - classes that have lots of methods. They often indroduce thight coupling to multiple clients (unable to separate clients and deploy separately), we isolate clients by creating interfaces that those client can use
+Since interfaces are more logically coupled to classes that called them than classes that implement them, we can make sure that these interfaces contains only methods that these clients wish to call and we multiply inherit these interfaces to original fat class.
+These causes that chnges made for parts that serves particular client does not affect other clients and can be deployed separately.
+When clients can be deployed separately, they can be developed seperately (avoiding stepping on each other).
+
+The goal of this principle is to prevent backwards coupling by insuring you don't depend on methods that you don't call - Don't depend on thinfs you don't need, otherwise you create software that is rigid and fragile.
+
+---------------
+Dependency inversion
+
+2 types of dependencies:
+1. runtime - when one flow of control leaves one module and enters another, or when module accesses varialbes inside another modules - whenever two modules interact at runtime
+2. compile time - when one modules name appears in another module
+
+Structure design - top down design
+You start with main and then you design subrutines that main should call. Then you design subrutines that those subrutines should call and you continue to create this tree downwards. Source code dependecies follow run time dependencies.
+Because of this system of dependecies source code changes cause a lot of recompiles (modules depend on each other) you may need to redeploy a lot of modules. This also prevents ability to independly develop modules as components - when one team make a can change other must recompile and redeploy.
+
+To break out this corresponce between runtime and source code dependecy structure we need to use polymorphism.
+A -> B(f) : A has both compile time and run time dependecy on B
+
+In static languages we can introduces interface I: (A usues interfac I, B implements interface I)
+A -> I(f) <|- B(f) : A has runtime dependency on B, it doesn't have compile time dependecy on B. Both A and B have source code dependecy on the interface.
+Run time dependency of A points in  opposite direction that source code depenendecy of B (dependency inversion).
+
+In dynamic languages no interface is required, there is no source code dependency at all ( they rely on "unwritten abstraction of f")
+
+for both static and dynamic: A depends on abstraction of f and be implements f -> dependency B upon f oposes runtime dependecy of A upon B. That oposition is dependecy inversion (whenever source code dependecies oppose the flow of control).
+
+Inverting dependecies is the means in which we create boundries between software modules. Whenever we want a boundry to exist we choose which dependecies to inverse against a flow of control so the all dependecies points in the same direction across the boundry.
+Boundries like these are the ways we create plugins. Plugin is a module that is anonimowo called from another module.
+
+Formal definition: high level policy should not depend of low level detail. Low level detail should depend on high level policy.
+Modules that contain high level policy such as use cases should not depend on modules that contain these low level details such as databases or web formatting. And yet high level must eventually invoke low level functions - use cases must eventually read database records / display web pages.
+We should invert dependecies around boundries that separetes use cases from database and web system -> we design system such that database and web system are plugins to use cases.
+
+------------------
+Component - independly deployable library (dll, jar). Independly ...- change to one doesn't require recompile and redeploy to others
+
+Cohesion
+
+------------------
+Visitor e30 - 52:00
+Use whenever we have a behaviour which polymorphic to a hierarchy but does not belong to that hierarchy
+
+
+-------------------
+E32
+Singleton
+one of the kind object. Ex. service register, where client can register/lookup service.
+
+Monostate
+When you want to create one instance of an abject, but you don't want any of the clients of that object to know that there is just one instance.
+All of the varialbes of the class are static, but all of methods are non static
+
+Null Object
+
+Proxy
+When object that live on opposing sites of communicaion boundry need to communicate. It allows these two objects communicate wihtout knowing that boundry exists
+
+E33
+Facade
+Impose a policy upon another set of objects - constrain the way these objects communicate (inside with each other, ouside or both) + how outside world communicates with objects
+
+Mediator
+Sits behind the seats to impose a policy upon a group of objects, neither of these objects or client of these object know that the mediator exist.
+
+Flyweight
+Whenever you have large amount of objects that can share a fixed amount of state.
+
+Mementoto
+
+Extension Object
+
+Bridge
+when you have a group of objects that can be represented by several different inheritance hierarchies
+
+Chain of reponsibilities
+when you have a client that can be served by many different services, and you don't want client to know which service is doing its job
+
+Interpreter
+When you have a set of business rules, that you want to be so flexible that users and administrators can modify them without recompiling and redeploying the system
+
+Iterator
+is a way of hiding containers of objects, and representing them instead as a flow or a stream of objects
+
+Adapter
+is way of allowing two objects that don't know about each other to effectively communicate
+
+-------------------
+BDD
